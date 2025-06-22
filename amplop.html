@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jangan Serius Amat Bacanya</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .container {
+      position: relative;
+      width: 400px;
+      perspective: 1000px;
+      margin-top: 60px;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 250px;
+      background: #6cdb51;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      transition: transform 1s;
+      cursor: pointer;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: #9cf18f;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      z-index: 2;
+      transition: transform 1s ease;
+      transform-origin: top;
+    }
+
+    .letter {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 0;
+      background: #fff;
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 12px;
+      text-align: center;
+      transition: height 1s ease;
+      padding: 20px;
+    }
+
+    .letter.open {
+      height: 570px;
+    }
+
+    .flap.open {
+      transform: rotateX(180deg);
+    }
+
+    .envelope.open {
+      transform: translateY(140px);
+    }
+
+    .content {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease 0.5s;
+    }
+
+    .letter.open .content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content h2 {
+      color: #769f35;
+      margin-bottom: 10px;
+    }
+
+    .content p {
+      color: #444;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 75%; /* 4:3 aspect ratio */
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-wrapper img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .buttons button {
+      background-color: #6cdb51;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #e63946;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Musik -->
+<audio autoplay loop class="hidden">
+  <source src="Maroon 5 - Sunday Morning (Lyrics).mp3" />
+  Your browser does not support the audio element.
+</audio>
+
+<div class="container">
+  <div class="envelope" id="envelope" onclick="openEnvelope()"></div>
+  <div class="flap" id="flap"></div>
+  <div class="letter" id="letter">
+    <div class="content">
+      <h2>Untuk Cimmy Kusumadara 😎</h2>
+      <p>
+        Semangat ujian samaptanya,<br />
+        Semangat juga kuliahnya.<br />
+        Jangan lupa berdoa juga cimmy.
+      </p>
+      <div class="image-wrapper">
+        <img
+          src="foto2.png"
+          alt="Gambar Romantis"
+        />
+      </div>
+      <div class="buttons">
+        <button onclick="event.stopPropagation(); alert('Yay! Aku juga suka 😁')">Suka 😆</button>
+        <button onclick="event.stopPropagation(); alert('Sedih dengernya... 😥')">Tidak Suka 😅</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  let isOpened = false;
+  function openEnvelope() {
+    if (isOpened) return;
+    document.getElementById('envelope').classList.add('open');
+    document.getElementById('flap').classList.add('open');
+    document.getElementById('letter').classList.add('open');
+    isOpened = true;
+  }
+</script>
+
+</body>
+</html>
